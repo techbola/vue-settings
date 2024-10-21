@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="mb-4 text-2xl">Privacy</h2>
-    <form class="mx-auto space-y-4">
+    <form class="mx-auto space-y-4" @submit.prevent="save">
       <div class="flex items-center gap-1">
         <input type="checkbox" v-model="privacy.searchEngineIndexing" />
         <label>Search engine indexing</label>
@@ -22,6 +22,12 @@
 
 <script setup lang="ts">
 import { useSettings } from '@/composables/useSettings'
+import { useNotifications } from '@/composables/useNotifications'
 
 const { privacy } = useSettings()
+const { addNotification } = useNotifications()
+
+const save = () => {
+  addNotification('General Settings saved!')
+}
 </script>
