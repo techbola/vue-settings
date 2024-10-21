@@ -1,11 +1,16 @@
 <template>
   <main class="max-w-2xl px-4 mx-auto">
+    <h1 class="text-3xl font-bold">Settings</h1>
     <nav
       class="mb-4 font-medium text-center text-gray-500 border-b border-gray-200"
     >
-      <ul class="flex flex-wrap">
+      <ul class="flex flex-wrap -mb-px">
         <li v-for="tab in tabs" :key="tab.key">
-          <TabLink :tab="tab" :currentTab="currentTab" />
+          <TabLink
+            :tab="tab"
+            :currentTab="currentTab"
+            @click="currentTab = tab.key"
+          />
         </li>
       </ul>
     </nav>
