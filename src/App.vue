@@ -14,31 +14,54 @@
         </li>
       </ul>
     </nav>
+    <Transition name="fade" mode="out-in">
+      <component :is="currentTabComponent" />
+    </Transition>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { TabKey, Tab } from '@/types'
 
 import TabLink from '@/components/TabLink.vue'
+import GeneralSettings from '@/components/GeneralSettings.vue'
+import NotificationsSettings from '@/components/NotificationsSettings.vue'
+import PrivacySettings from '@/components/PrivacySettings.vue'
 
 const tabs: Tab[] = [
   {
     key: 'General',
     label: 'General',
+    component: GeneralSettings,
   },
   {
     key: 'Notifications',
     label: 'Notifications',
+    component: NotificationsSettings,
   },
   {
     key: 'Privacy',
     label: 'Privacy',
+    component: PrivacySettings,
   },
 ]
 
 const currentTab = ref<TabKey>('General')
+
+const currentTabComponent = computed(() => {
+  return tabs.find(tab => tab.key === currentTab.value)?.component
+})
 </script>
 
-<style scoped></style>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
