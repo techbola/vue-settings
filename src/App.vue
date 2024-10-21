@@ -15,7 +15,9 @@
       </ul>
     </nav>
     <FadeTransition name="fade" mode="out-in">
-      <component :is="currentTabComponent" />
+      <KeepAlive>
+        <component :is="currentTabComponent" />
+      </KeepAlive>
     </FadeTransition>
   </main>
 </template>
